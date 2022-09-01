@@ -1,0 +1,157 @@
+{
+  "ModelName": "Oshiete",
+  "ModelMetadata": {
+    "Author": "Josh Kennedy",
+    "DateCreated": "Sep 30, 2021, 07:02 PM",
+    "DateLastModified": "Oct 03, 2021, 09:04 PM",
+    "Description": "A model that represents the basic model types for the Oshiete system.",
+    "AWSService": "Amazon DynamoDB",
+    "Version": "3.0"
+  },
+  "DataModel": [
+    {
+      "TableName": "User",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "Id",
+          "AttributeType": "S"
+        },
+        "SortKey": {
+          "AttributeName": "CreationTimestamp",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "FirstName",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "LastName",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Email",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Password",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "AvatarUrl",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "DisplayName",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "Verified",
+          "AttributeType": "BOOL"
+        },
+        {
+          "AttributeName": "Staff",
+          "AttributeType": "BOOL"
+        }
+      ],
+      "GlobalSecondaryIndexes": [
+        {
+          "IndexName": "UserEmail",
+          "KeyAttributes": {
+            "PartitionKey": {
+              "AttributeName": "Email",
+              "AttributeType": "S"
+            }
+          },
+          "Projection": {
+            "ProjectionType": "ALL"
+          }
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      },
+      "BillingMode": "PROVISIONED",
+      "ProvisionedCapacitySettings": {
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5
+        },
+        "AutoScalingRead": {
+          "ScalableTargetRequest": {
+            "MinCapacity": 1,
+            "MaxCapacity": 10,
+            "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+          },
+          "ScalingPolicyConfiguration": {
+            "TargetValue": 70
+          }
+        },
+        "AutoScalingWrite": {
+          "ScalableTargetRequest": {
+            "MinCapacity": 1,
+            "MaxCapacity": 10,
+            "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+          },
+          "ScalingPolicyConfiguration": {
+            "TargetValue": 70
+          }
+        }
+      }
+    },
+    {
+      "TableName": "BouncerClient",
+      "KeyAttributes": {
+        "PartitionKey": {
+          "AttributeName": "Id",
+          "AttributeType": "S"
+        }
+      },
+      "NonKeyAttributes": [
+        {
+          "AttributeName": "Name",
+          "AttributeType": "S"
+        },
+        {
+          "AttributeName": "IsInternal",
+          "AttributeType": "BOOL"
+        },
+        {
+          "AttributeName": "Secret",
+          "AttributeType": "S"
+        }
+      ],
+      "DataAccess": {
+        "MySql": {}
+      },
+      "BillingMode": "PROVISIONED",
+      "ProvisionedCapacitySettings": {
+        "ProvisionedThroughput": {
+          "ReadCapacityUnits": 5,
+          "WriteCapacityUnits": 5
+        },
+        "AutoScalingRead": {
+          "ScalableTargetRequest": {
+            "MinCapacity": 1,
+            "MaxCapacity": 10,
+            "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+          },
+          "ScalingPolicyConfiguration": {
+            "TargetValue": 70
+          }
+        },
+        "AutoScalingWrite": {
+          "ScalableTargetRequest": {
+            "MinCapacity": 1,
+            "MaxCapacity": 10,
+            "ServiceRole": "AWSServiceRoleForApplicationAutoScaling_DynamoDBTable"
+          },
+          "ScalingPolicyConfiguration": {
+            "TargetValue": 70
+          }
+        }
+      }
+    }
+  ]
+}
